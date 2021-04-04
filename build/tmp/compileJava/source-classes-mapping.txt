@@ -1,2 +1,4 @@
+comAddresBook/Contact.java
+ comAddresBook.Contact
 comAddresBook/AddressBook.java
  comAddresBook.AddressBook
