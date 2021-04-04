@@ -1,6 +1,7 @@
 package comAddresBook;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AddressBook
@@ -9,7 +10,7 @@ public class AddressBook
     static String first_name, last_name, address, city, state, email;
     static int zip;
     static long phone_number;
-    ArrayList<Contact> details;
+    List<Contact> details;
     Scanner sc;
 
     //method to add contact to a list
@@ -20,7 +21,7 @@ public class AddressBook
     }
 
     //method to get contact details
-    public ArrayList<Contact> getContact()
+    public List<Contact> getContact()
     {
         return details;
     }
@@ -76,6 +77,13 @@ public class AddressBook
         }
     }
 
+    //method to delete contact
+    public void toDelete()
+    {
+        details.removeAll(details);
+        System.out.println("Contact deleted successfully!");
+    }
+
     //main method
     public static void main(String[] args)
     {
@@ -128,11 +136,11 @@ public class AddressBook
         System.out.println(ab.getContact());
 
         //to edit details
-        System.out.println("Do you want to edit details? y/n");
+        System.out.println("Do you want to:"+"\n"+"1.edit details?"+"\n"+"2.delete contact?"+"\n"+"3.exit");
         ab.sc = new Scanner(System.in);
-        String option = ab.sc.nextLine();
+        int option = ab.sc.nextInt();
 
-        if(option.equals("y"))
+        if(option == 1)
         {
             System.out.println("Select contact to edit:"+"\n"+"1."+first_name+"\n"+"2.none");
             int contactOption = ab.sc.nextInt();
@@ -140,6 +148,16 @@ public class AddressBook
             if(contactOption == 1)
             {
                 ab.optionToUpdate(contact_2);
+            }
+        }
+        else if(option == 2)
+        {
+            System.out.println("Select contact to delete:"+"\n"+"1."+first_name+"\n"+"2.none");
+            int contactOption = ab.sc.nextInt();
+
+            if(contactOption == 1)
+            {
+                ab.toDelete();
             }
         }
         System.out.println(ab.getContact());
