@@ -9,61 +9,71 @@ public class AddressBook
     static String first_name, last_name, address, city, state, email;
     static int zip;
     static long phone_number;
-    ArrayList<Contact> al;
+    ArrayList<Contact> details;
+    Scanner sc;
 
     //method to add contact to a list
     public void addToList(Contact contact)
     {
-        al = new ArrayList<>();
-        al.add(contact);
+        details = new ArrayList<>();
+        details.add(contact);
     }
 
     //method to get contact details
-    public void getContact()
+    public ArrayList<Contact> getContact()
     {
-        System.out.println(al.get(0));
+        return details;
     }
 
-    //method to take user input
-    public ArrayList userInput()
+    //method to edit details
+    public void optionToUpdate(Object object)
     {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Enter first name");
-        first_name = sc.nextLine();
-
-        System.out.println("Enter your last name");
-        last_name = sc.nextLine();
-
-        System.out.println("Enter your address");
-        address = sc.nextLine();
-
-        System.out.println("Enter your city");
-        city = sc.nextLine();
-
-        System.out.println("Enter your state");
-        state = sc.nextLine();
-
-        System.out.println("Enter your email");
-        email = sc.nextLine();
-
-        System.out.println("Enter your zip");
-        zip = sc.nextInt();
-
-        System.out.println("Enter your phone number");
-        phone_number = sc.nextLong();
-
-        ArrayList details = new ArrayList();
-        details.add(first_name);
-        details.add(last_name);
-        details.add(address);
-        details.add(city);
-        details.add(state);
-        details.add(email);
-        details.add(zip);
-        details.add(phone_number);
-
-        return details;
+        Contact anObject = (Contact) object;
+        sc = new Scanner(System.in);
+        System.out.println("Which detail do you want to change?");
+        System.out.println("1. first name" +"\n"+"2. last name"+"\n"+
+                "3. address"+"\n"+"4. city"+"\n"+"5. state"+"\n"+
+                "6. zip"+"\n"+"7. phone number"+"\n"+"8. email"+"\n"+
+                "9. exit");
+        int option =sc.nextInt();
+        sc = new Scanner(System.in);
+        switch(option)
+        {
+            case 1:
+                System.out.println("Enter the first name:");
+                anObject.setFIRST_NAME(sc.nextLine());
+                break;
+            case 2:
+                System.out.println("Enter the last name: ");
+                anObject.setLAST_NAME(sc.nextLine());
+                break;
+            case 3:
+                System.out.println("Enter the Address: ");
+                anObject.setADDRESS(sc.nextLine());
+                break;
+            case 4:
+                System.out.println("Enter the city");
+                anObject.setCITY(sc.nextLine());
+                break;
+            case 5:
+                System.out.println("Enter the state");
+                anObject.setSTATE(sc.nextLine());
+                break;
+            case 6:
+                System.out.println("Enter the zip");
+                anObject.setZIP(sc.nextInt());
+                break;
+            case 7:
+                System.out.println("Enter the phone number");
+                anObject.setPHONE_NUMBER(sc.nextLong());
+                break;
+            case 8:
+                System.out.println("Enter the email");
+                anObject.setEMAIL(sc.nextLine());
+                break;
+            default:
+                System.out.println("Thank you");
+        }
     }
 
     //main method
@@ -71,16 +81,67 @@ public class AddressBook
     {
         AddressBook ab = new AddressBook();
 
-        //entering details to the Contact
-        ArrayList al = new ArrayList();
-        al = ab.userInput();
-        Contact member = new Contact((String)al.get(0),(String)al.get(1),(String)al.get(2),(String)al.get(3),
-                                    (String)al.get(4),(String)al.get(5),(int)al.get(6),(long)al.get(7));
+        /*
+        Entering details to the Contact and adding it to address book
+         */
 
-        //adding contact to the address book
-        ab.addToList(member);
+        //Adding contact details manually
+//        Contact contact_1 = new Contact("Rahul","Mambrio",
+//                                    "Near police station","Hyderabad",
+//                                    "Kerala","rahul.mambrio@gmail.com",zip,phone_number);
+//        ab.addToList(contact_1);
+
+        System.out.println(ab.getContact());
+
+        //Adding details from console
+        ab.sc = new Scanner(System.in);
+
+        System.out.println("Enter first name");
+        first_name = ab.sc.nextLine();
+
+        System.out.println("Enter your last name");
+        last_name = ab.sc.nextLine();
+
+        System.out.println("Enter your address");
+        address = ab.sc.nextLine();
+
+        System.out.println("Enter your city");
+        city = ab.sc.nextLine();
+
+        System.out.println("Enter your state");
+        state = ab.sc.nextLine();
+
+        System.out.println("Enter your email");
+        email = ab.sc.nextLine();
+
+        System.out.println("Enter your zip");
+        zip = ab.sc.nextInt();
+
+        System.out.println("Enter your phone number");
+        phone_number = ab.sc.nextLong();
+
+        Contact contact_2 = new Contact(first_name,last_name,address,city,state,email,zip,phone_number);
+
+        ab.addToList(contact_2);
 
         //getting contact from the address book
-        ab.getContact();
+        System.out.println(ab.getContact());
+
+        //to edit details
+        System.out.println("Do you want to edit details? y/n");
+        ab.sc = new Scanner(System.in);
+        String option = ab.sc.nextLine();
+
+        if(option.equals("y"))
+        {
+            System.out.println("Select contact to edit:"+"\n"+"1."+first_name+"\n"+"2.none");
+            int contactOption = ab.sc.nextInt();
+
+            if(contactOption == 1)
+            {
+                ab.optionToUpdate(contact_2);
+            }
+        }
+        System.out.println(ab.getContact());
     }
 }
