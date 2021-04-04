@@ -11,7 +11,7 @@ public class Contact
     public final long PHONE_NUMBER;
     public final String EMAIL;
 
-    public Contact(String first_name, String last_name, String address, String city, String state, int zip, long phone_number, String email)
+    public Contact(String first_name, String last_name, String address, String city, String state, String email, int zip, long phone_number)
     {
         FIRST_NAME = first_name;
         LAST_NAME = last_name;
