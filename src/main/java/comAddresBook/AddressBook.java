@@ -10,21 +10,9 @@ public class AddressBook
     static String first_name, last_name, address, city, state, email;
     static int zip;
     static long phone_number;
-    List<Contact> details;
+    List<Contact> contact; //to store a contact
+    AddressBookContactList abcl;
     Scanner sc;
-
-    //method to add contact to a list
-    public void addToList(Contact contact)
-    {
-        details = new ArrayList<>();
-        details.add(contact);
-    }
-
-    //method to get contact details
-    public List<Contact> getContact()
-    {
-        return details;
-    }
 
     //method to edit details
     public void optionToUpdate(Object object)
@@ -78,9 +66,9 @@ public class AddressBook
     }
 
     //method to delete contact
-    public void toDelete()
+    public void toDelete(Contact contact)
     {
-        details.removeAll(details);
+        abcl.removeList(contact);
         System.out.println("Contact deleted successfully!");
     }
 
@@ -94,12 +82,16 @@ public class AddressBook
          */
 
         //Adding contact details manually
-//        Contact contact_1 = new Contact("Rahul","Mambrio",
-//                                    "Near police station","Hyderabad",
-//                                    "Kerala","rahul.mambrio@gmail.com",zip,phone_number);
-//        ab.addToList(contact_1);
+        Contact contact_1 = new Contact("Rahul","Mambrio",
+                                    "Near police station","Hyderabad",
+                                    "Kerala","rahul.mambrio@gmail.com",
+                                        687847,8688332960L);
+        ab.contact = new ArrayList<>();
+        ab.contact.add(contact_1);
 
-        System.out.println(ab.getContact());
+
+        ab.abcl = new AddressBookContactList(ab.contact);
+        System.out.println(ab.abcl.getList());
 
         //Adding details from console
         ab.sc = new Scanner(System.in);
@@ -130,10 +122,12 @@ public class AddressBook
 
         Contact contact_2 = new Contact(first_name,last_name,address,city,state,email,zip,phone_number);
 
-        ab.addToList(contact_2);
+        ab.contact.add(contact_2);
+
+        ab.abcl = new AddressBookContactList(ab.contact);
 
         //getting contact from the address book
-        System.out.println(ab.getContact());
+        System.out.println(ab.abcl.getList());
 
         //to edit details
         System.out.println("Do you want to:"+"\n"+"1.edit details?"+"\n"+"2.delete contact?"+"\n"+"3.exit");
@@ -142,24 +136,42 @@ public class AddressBook
 
         if(option == 1)
         {
-            System.out.println("Select contact to edit:"+"\n"+"1."+first_name+"\n"+"2.none");
+            System.out.println("Select contact to edit:"+"\n"+"1."+contact_1.getFIRST_NAME()+"\n"+"2."+contact_2.getFIRST_NAME()+"\n"+"3.none");
             int contactOption = ab.sc.nextInt();
 
-            if(contactOption == 1)
+            switch(contactOption )
             {
-                ab.optionToUpdate(contact_2);
+                case 1:
+                    ab.optionToUpdate(contact_1);
+                    break;
+                case 2:
+                    ab.optionToUpdate(contact_2);
+                    break;
+                default:
+                    System.out.println("Thank you!");
             }
         }
         else if(option == 2)
         {
-            System.out.println("Select contact to delete:"+"\n"+"1."+first_name+"\n"+"2.none");
+            System.out.println("Select contact to delete:"+"\n"+"1."+contact_1.getFIRST_NAME()+"\n"+"2."+contact_2.getFIRST_NAME()+"3.none");
             int contactOption = ab.sc.nextInt();
 
-            if(contactOption == 1)
+            switch(contactOption)
             {
-                ab.toDelete();
+                case 1:
+                    ab.toDelete(contact_1);
+                    break;
+                case 2:
+                    ab.toDelete(contact_2);
+                    break;
+                default:
+                    System.out.println("Thank you!");
             }
         }
-        System.out.println(ab.getContact());
+        else
+        {
+            System.out.println("Thank you!");
+        }
+        System.out.println(ab.abcl.getList());
     }
 }
