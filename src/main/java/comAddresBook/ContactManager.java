@@ -13,8 +13,8 @@ public class ContactManager {
     /**
      * to get all the list of contacts in one book
      */
-    public void getContactList() {
-        System.out.println(contactList);
+    public List<Contact> getContactList() {
+        return contactList;
     }
     
     /**
@@ -116,7 +116,7 @@ public class ContactManager {
     public void accessContact() {
         boolean isExit = false;
         while(!isExit) {
-            System.out.println("Select option: \n1.Add Contact\n2.Edit Contact\n3.Delete Contact\n4.Exit");
+            System.out.println("Select option: \n1.Add Contact\n2.Edit Contact\n3.Delete Contact\n4.Find contact\n5.Exit");
             Scanner scanner = new Scanner(System.in);
             int option = scanner.nextInt();
             switch(option) {
@@ -140,11 +140,45 @@ public class ContactManager {
                         Contact contact = searchContact(name);
                         deleteContact(contact);
                     }
+                case 4:
+                    findContactOptions();
                     break;
                 default:
                     System.out.println("Thanks!");
                     isExit = true;
             }
+        }
+    }
+    
+    /**
+     * finds the contact by various means
+     */
+    private static void findContactOptions(){
+        System.out.println("Select the option: \n1.find by contact name\n2.find by city/state\n3.exit");
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+        
+        switch(option){
+            case 1:
+                String name1 = getName();
+                if(isContactExist(name1)) {
+                    Contact contact = searchContact(name1);
+                    System.out.println("Contact " + name1 + ": " +contact);
+                }else{
+                    System.out.println("City/State does not exists!");
+                }
+                break;
+            case 2:
+                String name2 = getCityOrStateName();
+                if(isCityOrStateExist(name2)) {
+                    Contact contact = searchContactByCityOrState(name2);
+                    System.out.println("Contact from city/state " + name2 + ": " +contact);
+                }else{
+                    System.out.println("City/State does not exists!");
+                }
+                break;
+            default:
+                System.out.println("Thank you!");
         }
     }
     
@@ -160,6 +194,17 @@ public class ContactManager {
     }
     
     /**
+     * asks the user for name and returns it
+     *
+     * @return
+     */
+    private static String getCityOrStateName() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter city/state name");
+        return scanner.nextLine();
+    }
+    
+    /**
      * To find if contact exists or not
      *
      * @param name first or last name of the contact
@@ -167,6 +212,15 @@ public class ContactManager {
      */
     private static boolean isContactExist(String name) {
         return contactList.stream().anyMatch(personElement -> personElement.getFIRST_NAME().equals(name) || personElement.getLAST_NAME().equals(name));
+    }
+    
+    /**
+     * checks the list for city/state
+     * @param name city/state name given by user
+     * @return true/false
+     */
+    private static boolean isCityOrStateExist(String name) {
+        return contactList.stream().anyMatch(personElement -> personElement.getCITY().equals(name) || personElement.getSTATE().equals(name));
     }
     
     /**
@@ -178,5 +232,10 @@ public class ContactManager {
     private static Contact searchContact(String name) {
         Contact foundContact = contactList.stream().filter(contact -> contact.getFIRST_NAME().equals(name) || contact.getLAST_NAME().equals(name)).findFirst().orElse(null);
         return foundContact;
+    }
+    
+    private static Contact searchContactByCityOrState(String name){
+        Contact foundContact = contactList.stream().filter(contact -> contact.getSTATE().equals(name) || contact.getCITY().equals(name)).findFirst().orElse(null);
+    return foundContact;
     }
 }
