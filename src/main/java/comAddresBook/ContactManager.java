@@ -2,13 +2,21 @@ package comAddresBook;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Manages contact book details
  */
 public class ContactManager {
-    static List<Contact> contactList = new ArrayList<>();//contains all contacts
+    ScannerForUserInput scannerForUserInput = new ScannerForUserInput();
+    List<Contact> contactList = new ArrayList<>();//contains all contacts
+    
+    /**
+     * Initializes Contact class when new contact is added
+     */
+    public Contact initializer() {
+        Contact contact = new Contact();
+        return contact;
+    }
     
     /**
      * to get all the list of contacts in one book
@@ -17,12 +25,17 @@ public class ContactManager {
         return contactList;
     }
     
+    @Override
+    public String toString() {
+        return "ContactManager{" + "contactList=" + contactList + '}';
+    }
+    
     /**
      * to remove contact
      *
      * @param contact object of Contact class
      */
-    public static void deleteContact(Contact contact) {
+    public void deleteContact(Contact contact) {
         contactList.remove(contact);
         System.out.println(contactList);
     }
@@ -30,46 +43,46 @@ public class ContactManager {
     /**
      * edits the contact details of selected name
      */
-    public static void editDetails() {
-        Scanner scanner = new Scanner(System.in);
-        Scanner scanner1 = new Scanner(System.in);
-        System.out.println("Select option:" + "\n" + "1.first name" + "\n" + "2.last name" + "\n" + "3.address" + "\n" + "4.city" + "\n" + "5.state" + "\n" + "6.email" + "\n" + "7.zip" + "\n" + "8.phone number" + "\n" + "9.exit");
-        
-        switch(scanner.nextInt()) {
-            case 1:
-                System.out.println("Enter first name to change: ");
-                Contact.setFIRST_NAME(scanner1.nextLine());
-                break;
-            case 2:
-                System.out.println("Enter last name to change: ");
-                Contact.setLAST_NAME(scanner1.nextLine());
-                break;
-            case 3:
-                System.out.println("Enter new address to change: ");
-                Contact.setADDRESS(scanner1.nextLine());
-                break;
-            case 4:
-                System.out.println("Enter new city to change: ");
-                Contact.setCITY(scanner1.nextLine());
-                break;
-            case 5:
-                System.out.println("Enter new state to change: ");
-                Contact.setSTATE(scanner1.nextLine());
-                break;
-            case 6:
-                System.out.println("Enter new email to change: ");
-                Contact.setEMAIL(scanner1.nextLine());
-                break;
-            case 7:
-                System.out.println("Enter new zip to change: ");
-                Contact.setZIP(scanner1.nextInt());
-                break;
-            case 8:
-                System.out.println("Enter new phone number to change: ");
-                Contact.setPHONE_NUMBER(scanner1.nextLong());
-                break;
-            default:
-                System.out.println("Thank you!");
+    public void editDetails() {
+        Contact contact = searchContact(getName());
+        if(contact != null) {
+            System.out.println("Select option:" + "\n" + "1.first name" + "\n" + "2.last name" + "\n" + "3.address" + "\n" + "4.city" + "\n" + "5.state" + "\n" + "6.email" + "\n" + "7.zip" + "\n" + "8.phone number" + "\n" + "9.exit");
+            switch(scannerForUserInput.scannerInitializer().nextInt()) {
+                case 1:
+                    System.out.println("Enter new first name to change: ");
+                    contact.setFIRST_NAME(scannerForUserInput.scannerInitializer().nextLine());
+                    break;
+                case 2:
+                    System.out.println("Enter new last name to change: ");
+                    contact.setLAST_NAME(scannerForUserInput.scannerInitializer().nextLine());
+                    break;
+                case 3:
+                    System.out.println("Enter new address to change: ");
+                    contact.setADDRESS(scannerForUserInput.scannerInitializer().nextLine());
+                    break;
+                case 4:
+                    System.out.println("Enter new city to change: ");
+                    contact.setCITY(scannerForUserInput.scannerInitializer().nextLine());
+                    break;
+                case 5:
+                    System.out.println("Enter new state to change: ");
+                    contact.setSTATE(scannerForUserInput.scannerInitializer().nextLine());
+                    break;
+                case 6:
+                    System.out.println("Enter new email to change: ");
+                    contact.setEMAIL(scannerForUserInput.scannerInitializer().nextLine());
+                    break;
+                case 7:
+                    System.out.println("Enter new zip to change: ");
+                    contact.setZIP(scannerForUserInput.scannerInitializer().nextInt());
+                    break;
+                case 8:
+                    System.out.println("Enter new phone number to change: ");
+                    contact.setPHONE_NUMBER(scannerForUserInput.scannerInitializer().nextLine());
+                    break;
+                default:
+                    System.out.println("Thank you!");
+            }
         }
         System.out.println(contactList);
     }
@@ -78,33 +91,31 @@ public class ContactManager {
      * takes details from the user and adds them to the Contact.
      * Then adds the Contact to the list
      */
-    public static void addContact() {
-        Contact contact = new Contact();
-        
-        Scanner scanner = new Scanner(System.in);
+    public void addContact() {
+        Contact contact = initializer();
         System.out.println("Enter first name");
-        contact.setFIRST_NAME(scanner.nextLine());
+        contact.setFIRST_NAME(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter last name");
-        contact.setLAST_NAME(scanner.nextLine());
+        contact.setLAST_NAME(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter address");
-        contact.setADDRESS(scanner.nextLine());
+        contact.setADDRESS(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter city");
-        contact.setCITY(scanner.nextLine());
+        contact.setCITY(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter state");
-        contact.setSTATE(scanner.nextLine());
+        contact.setSTATE(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter email");
-        contact.setEMAIL(scanner.nextLine());
+        contact.setEMAIL(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter zip");
-        contact.setZIP(scanner.nextInt());
+        contact.setZIP(scannerForUserInput.scannerInitializer().nextInt());
         
         System.out.println("Enter phone number");
-        contact.setPHONE_NUMBER(scanner.nextLong());
+        contact.setPHONE_NUMBER(scannerForUserInput.scannerInitializer().nextLine());
         
         contactList.add(contact);
         System.out.println(contactList);
@@ -117,8 +128,7 @@ public class ContactManager {
         boolean isExit = false;
         while(!isExit) {
             System.out.println("Select option: \n1.Add Contact\n2.Edit Contact\n3.Delete Contact\n4.Find contact\n5.Exit");
-            Scanner scanner = new Scanner(System.in);
-            int option = scanner.nextInt();
+            int option = scannerForUserInput.scannerInitializer().nextInt();
             switch(option) {
                 case 1:
                     if(!isContactExist(getName())) {
@@ -139,7 +149,10 @@ public class ContactManager {
                     if(isContactExist(name)) {
                         Contact contact = searchContact(name);
                         deleteContact(contact);
+                    }else{
+                        System.out.println("Contact does not exists!");
                     }
+                    break;
                 case 4:
                     findContactOptions();
                     break;
@@ -153,27 +166,26 @@ public class ContactManager {
     /**
      * finds the contact by various means
      */
-    private static void findContactOptions(){
+    private void findContactOptions() {
         System.out.println("Select the option: \n1.find by contact name\n2.find by city/state\n3.exit");
-        Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        
-        switch(option){
+        int option = scannerForUserInput.scannerInitializer().nextInt();
+    
+        switch(option) {
             case 1:
                 String name1 = getName();
                 if(isContactExist(name1)) {
-                    Contact contact = searchContact(name1);
-                    System.out.println("Contact " + name1 + ": " +contact);
-                }else{
-                    System.out.println("City/State does not exists!");
+                    Contact contact1 = searchContact(name1);
+                    System.out.println("Contact " + name1 + ": " + contact1);
+                } else {
+                    System.out.println("Contact does not exists!");
                 }
                 break;
             case 2:
                 String name2 = getCityOrStateName();
                 if(isCityOrStateExist(name2)) {
                     Contact contact = searchContactByCityOrState(name2);
-                    System.out.println("Contact from city/state " + name2 + ": " +contact);
-                }else{
+                    System.out.println("Contact from city/state " + name2 + ": " + contact);
+                } else {
                     System.out.println("City/State does not exists!");
                 }
                 break;
@@ -187,10 +199,9 @@ public class ContactManager {
      *
      * @return
      */
-    private static String getName() {
-        Scanner scanner = new Scanner(System.in);
+    private String getName() {
         System.out.println("Enter contact name");
-        return scanner.nextLine();
+        return scannerForUserInput.scannerInitializer().nextLine();
     }
     
     /**
@@ -198,10 +209,9 @@ public class ContactManager {
      *
      * @return
      */
-    private static String getCityOrStateName() {
-        Scanner scanner = new Scanner(System.in);
+    private String getCityOrStateName() {
         System.out.println("Enter city/state name");
-        return scanner.nextLine();
+        return scannerForUserInput.scannerInitializer().nextLine();
     }
     
     /**
@@ -210,17 +220,26 @@ public class ContactManager {
      * @param name first or last name of the contact
      * @return true/false
      */
-    private static boolean isContactExist(String name) {
-        return contactList.stream().anyMatch(personElement -> personElement.getFIRST_NAME().equals(name) || personElement.getLAST_NAME().equals(name));
-    }
+        private boolean isContactExist(String name) {
+        boolean existance;
+            existance = contactList.stream()
+                    .anyMatch(personElement ->
+                            personElement.getFIRST_NAME().equals(name) ||
+                                    personElement.getLAST_NAME().equals(name));
+            return existance;
+        }
     
     /**
      * checks the list for city/state
+     *
      * @param name city/state name given by user
      * @return true/false
      */
-    private static boolean isCityOrStateExist(String name) {
-        return contactList.stream().anyMatch(personElement -> personElement.getCITY().equals(name) || personElement.getSTATE().equals(name));
+    private boolean isCityOrStateExist(String name) {
+        return contactList.stream()
+                          .anyMatch(personElement ->
+                                    personElement.getCITY().equals(name) ||
+                                            personElement.getSTATE().equals(name));
     }
     
     /**
@@ -229,13 +248,27 @@ public class ContactManager {
      * @param name first or last name of the contact
      * @return object of the Contact (Contact it self)
      */
-    private static Contact searchContact(String name) {
-        Contact foundContact = contactList.stream().filter(contact -> contact.getFIRST_NAME().equals(name) || contact.getLAST_NAME().equals(name)).findFirst().orElse(null);
+    private Contact searchContact(String name) {
+        Contact foundContact = contactList.stream()
+                .filter(contact -> contact.getFIRST_NAME().equals(name) ||
+                        contact.getLAST_NAME().equals(name))
+                .findFirst().orElse(null);
         return foundContact;
     }
     
-    private static Contact searchContactByCityOrState(String name){
-        Contact foundContact = contactList.stream().filter(contact -> contact.getSTATE().equals(name) || contact.getCITY().equals(name)).findFirst().orElse(null);
-    return foundContact;
+    /**
+     * to find contact by city/state
+     *
+     * @param name
+     * @return
+     */
+    private Contact searchContactByCityOrState(String name) {
+        Contact foundContact = contactList.stream()
+                .filter(contact -> contact.getSTATE().equals(name) ||
+                        contact.getCITY().equals(name))
+                .findFirst().orElse(null);
+        return foundContact;
     }
+    
+    
 }

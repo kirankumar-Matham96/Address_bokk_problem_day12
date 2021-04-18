@@ -1,96 +1,82 @@
 package comAddresBook;
 
+import java.util.Objects;
+
 /**
  * POJO for contacts
  */
 public class Contact {
-    private static String FIRST_NAME;
-    private static String LAST_NAME;
-    private static String ADDRESS;
-    private static String CITY;
-    private static String STATE;
-    private static String EMAIL;
-    private static int ZIP;
-    private static long PHONE_NUMBER;
+    private String FIRST_NAME;
+    private String LAST_NAME;
+    private String ADDRESS;
+    private String CITY;
+    private String STATE;
+    private String EMAIL;
+    private int ZIP;
+    private String PHONE_NUMBER;
     
-    public String getFIRST_NAME()
-    {
+    public String getFIRST_NAME() {
         return FIRST_NAME;
     }
     
-    public static void setFIRST_NAME(String FIRST_NAME)
-    {
-        Contact.FIRST_NAME = FIRST_NAME;
+    public void setFIRST_NAME(String FIRST_NAME) {
+        this.FIRST_NAME = FIRST_NAME;
     }
     
-    public String getLAST_NAME()
-    {
+    public String getLAST_NAME() {
         return LAST_NAME;
     }
     
-    public static void setLAST_NAME(String LAST_NAME)
-    {
-        Contact.LAST_NAME = LAST_NAME;
+    public void setLAST_NAME(String LAST_NAME) {
+        this.LAST_NAME = LAST_NAME;
     }
     
-    public String getADDRESS()
-    {
+    public String getADDRESS() {
         return ADDRESS;
     }
     
-    public static void setADDRESS(String ADDRESS)
-    {
-        Contact.ADDRESS = ADDRESS;
+    public void setADDRESS(String ADDRESS) {
+        this.ADDRESS = ADDRESS;
     }
     
-    public String getCITY()
-    {
+    public String getCITY() {
         return CITY;
     }
     
-    public static void setCITY(String CITY)
-    {
-        Contact.CITY = CITY;
+    public void setCITY(String CITY) {
+        this.CITY = CITY;
     }
     
-    public String getSTATE()
-    {
+    public String getSTATE() {
         return STATE;
     }
     
-    public static void setSTATE(String STATE)
-    {
-        Contact.STATE = STATE;
+    public void setSTATE(String STATE) {
+        this.STATE = STATE;
     }
     
-    public String getEMAIL()
-    {
+    public String getEMAIL() {
         return EMAIL;
     }
     
-    public static void setEMAIL(String EMAIL)
-    {
-        Contact.EMAIL = EMAIL;
+    public void setEMAIL(String EMAIL) {
+        this.EMAIL = EMAIL;
     }
     
-    public int getZIP()
-    {
+    public int getZIP() {
         return ZIP;
     }
     
-    public static void setZIP(int ZIP)
-    {
-        Contact.ZIP = ZIP;
+    public void setZIP(int ZIP) {
+        this.ZIP = ZIP;
     }
     
-    public long getPHONE_NUMBER()
-    {
+    public String getPHONE_NUMBER() {
         return PHONE_NUMBER;
     }
     
-    public static void setPHONE_NUMBER(long PHONE_NUMBER)
-    {
-        Contact.PHONE_NUMBER = PHONE_NUMBER;
+    public void setPHONE_NUMBER(String PHONE_NUMBER) {
+        this.PHONE_NUMBER = PHONE_NUMBER;
     }
     
     @Override
@@ -100,5 +86,22 @@ public class Contact {
                 LAST_NAME  + "\n" + "ADDRESS = " + ADDRESS + "\n"+ "CITY = " + CITY + "\n"+
                 "STATE = " + STATE + "\n" + "EMAIL = " + EMAIL + "\n" +
                 "ZIP = " + ZIP + "\n" + "PHONE_NUMBER = " + PHONE_NUMBER + "\n" + '}';
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(FIRST_NAME,LAST_NAME);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){
+            return true;
+        }
+        if(obj == null || getClass() != obj.getClass()){
+            return false;
+        }
+        Contact contact = (Contact) obj;
+        return Objects.equals(FIRST_NAME, contact.FIRST_NAME) && Objects.equals(LAST_NAME,contact.LAST_NAME);
     }
 }
