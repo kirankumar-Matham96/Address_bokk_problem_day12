@@ -6,91 +6,90 @@ import java.util.Objects;
  * POJO for contacts
  */
 public class Contact {
-    private String FIRST_NAME;
-    private String LAST_NAME;
-    private String ADDRESS;
-    private String CITY;
-    private String STATE;
-    private String EMAIL;
-    private int ZIP;
-    private String PHONE_NUMBER;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String state;
+    private String email;
+    private int zip;
+    private String phoneNumber;
     
-    public String getFIRST_NAME() {
-        return FIRST_NAME;
+    public String getFirstName() {
+        return firstName;
     }
     
-    public void setFIRST_NAME(String FIRST_NAME) {
-        this.FIRST_NAME = FIRST_NAME;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
     
-    public String getLAST_NAME() {
-        return LAST_NAME;
+    public String getLastName() {
+        return lastName;
     }
     
-    public void setLAST_NAME(String LAST_NAME) {
-        this.LAST_NAME = LAST_NAME;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     
-    public String getADDRESS() {
-        return ADDRESS;
+    public String getAddress() {
+        return address;
     }
     
-    public void setADDRESS(String ADDRESS) {
-        this.ADDRESS = ADDRESS;
+    public void setAddress(String address) {
+        this.address = address;
     }
     
-    public String getCITY() {
-        return CITY;
+    public String getCity() {
+        return city;
     }
     
-    public void setCITY(String CITY) {
-        this.CITY = CITY;
+    public void setCity(String city) {
+        this.city = city;
     }
     
-    public String getSTATE() {
-        return STATE;
+    public String getState() {
+        return state;
     }
     
-    public void setSTATE(String STATE) {
-        this.STATE = STATE;
+    public void setState(String state) {
+        this.state = state;
     }
     
-    public String getEMAIL() {
-        return EMAIL;
+    public String getEmail() {
+        return email;
     }
     
-    public void setEMAIL(String EMAIL) {
-        this.EMAIL = EMAIL;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
-    public int getZIP() {
-        return ZIP;
+    public int getZip() {
+        return zip;
     }
     
-    public void setZIP(int ZIP) {
-        this.ZIP = ZIP;
+    public void setZip(int zip) {
+        this.zip = zip;
     }
     
-    public String getPHONE_NUMBER() {
-        return PHONE_NUMBER;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
     
-    public void setPHONE_NUMBER(String PHONE_NUMBER) {
-        this.PHONE_NUMBER = PHONE_NUMBER;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
     @Override
     public String toString()
     {
-        return "Contact{" + "\n" + "FIRST_NAME = " + FIRST_NAME + "\n"+ "LAST_NAME = " +
-                LAST_NAME  + "\n" + "ADDRESS = " + ADDRESS + "\n"+ "CITY = " + CITY + "\n"+
-                "STATE = " + STATE + "\n" + "EMAIL = " + EMAIL + "\n" +
-                "ZIP = " + ZIP + "\n" + "PHONE_NUMBER = " + PHONE_NUMBER + "\n" + '}';
+        return "Contact{" + "\n" + "FIRST_NAME = " + firstName + "\n"+ "LAST_NAME = " + lastName + "\n" + "ADDRESS = " + address + "\n"+ "CITY = " + city + "\n"+
+                "STATE = " + state + "\n" + "EMAIL = " + email + "\n" +
+                "ZIP = " + zip + "\n" + "PHONE_NUMBER = " + phoneNumber + "\n" + '}';
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(FIRST_NAME,LAST_NAME);
+        return Objects.hash(firstName, lastName);
     }
     
     @Override
@@ -102,6 +101,6 @@ public class Contact {
             return false;
         }
         Contact contact = (Contact) obj;
-        return Objects.equals(FIRST_NAME, contact.FIRST_NAME) && Objects.equals(LAST_NAME,contact.LAST_NAME);
+        return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName,contact.lastName);
     }
 }

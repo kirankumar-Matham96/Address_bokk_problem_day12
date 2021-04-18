@@ -50,35 +50,35 @@ public class ContactManager {
             switch(scannerForUserInput.scannerInitializer().nextInt()) {
                 case 1:
                     System.out.println("Enter new first name to change: ");
-                    contact.setFIRST_NAME(scannerForUserInput.scannerInitializer().nextLine());
+                    contact.setFirstName(scannerForUserInput.scannerInitializer().nextLine());
                     break;
                 case 2:
                     System.out.println("Enter new last name to change: ");
-                    contact.setLAST_NAME(scannerForUserInput.scannerInitializer().nextLine());
+                    contact.setLastName(scannerForUserInput.scannerInitializer().nextLine());
                     break;
                 case 3:
                     System.out.println("Enter new address to change: ");
-                    contact.setADDRESS(scannerForUserInput.scannerInitializer().nextLine());
+                    contact.setAddress(scannerForUserInput.scannerInitializer().nextLine());
                     break;
                 case 4:
                     System.out.println("Enter new city to change: ");
-                    contact.setCITY(scannerForUserInput.scannerInitializer().nextLine());
+                    contact.setCity(scannerForUserInput.scannerInitializer().nextLine());
                     break;
                 case 5:
                     System.out.println("Enter new state to change: ");
-                    contact.setSTATE(scannerForUserInput.scannerInitializer().nextLine());
+                    contact.setState(scannerForUserInput.scannerInitializer().nextLine());
                     break;
                 case 6:
                     System.out.println("Enter new email to change: ");
-                    contact.setEMAIL(scannerForUserInput.scannerInitializer().nextLine());
+                    contact.setEmail(scannerForUserInput.scannerInitializer().nextLine());
                     break;
                 case 7:
                     System.out.println("Enter new zip to change: ");
-                    contact.setZIP(scannerForUserInput.scannerInitializer().nextInt());
+                    contact.setZip(scannerForUserInput.scannerInitializer().nextInt());
                     break;
                 case 8:
                     System.out.println("Enter new phone number to change: ");
-                    contact.setPHONE_NUMBER(scannerForUserInput.scannerInitializer().nextLine());
+                    contact.setPhoneNumber(scannerForUserInput.scannerInitializer().nextLine());
                     break;
                 default:
                     System.out.println("Thank you!");
@@ -94,28 +94,28 @@ public class ContactManager {
     public void addContact() {
         Contact contact = initializer();
         System.out.println("Enter first name");
-        contact.setFIRST_NAME(scannerForUserInput.scannerInitializer().nextLine());
+        contact.setFirstName(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter last name");
-        contact.setLAST_NAME(scannerForUserInput.scannerInitializer().nextLine());
+        contact.setLastName(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter address");
-        contact.setADDRESS(scannerForUserInput.scannerInitializer().nextLine());
+        contact.setAddress(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter city");
-        contact.setCITY(scannerForUserInput.scannerInitializer().nextLine());
+        contact.setCity(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter state");
-        contact.setSTATE(scannerForUserInput.scannerInitializer().nextLine());
+        contact.setState(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter email");
-        contact.setEMAIL(scannerForUserInput.scannerInitializer().nextLine());
+        contact.setEmail(scannerForUserInput.scannerInitializer().nextLine());
         
         System.out.println("Enter zip");
-        contact.setZIP(scannerForUserInput.scannerInitializer().nextInt());
+        contact.setZip(scannerForUserInput.scannerInitializer().nextInt());
         
         System.out.println("Enter phone number");
-        contact.setPHONE_NUMBER(scannerForUserInput.scannerInitializer().nextLine());
+        contact.setPhoneNumber(scannerForUserInput.scannerInitializer().nextLine());
         
         contactList.add(contact);
         System.out.println(contactList);
@@ -224,8 +224,8 @@ public class ContactManager {
         boolean existance;
             existance = contactList.stream()
                     .anyMatch(personElement ->
-                            personElement.getFIRST_NAME().equals(name) ||
-                                    personElement.getLAST_NAME().equals(name));
+                            personElement.getFirstName().equals(name) ||
+                                    personElement.getLastName().equals(name));
             return existance;
         }
     
@@ -238,8 +238,8 @@ public class ContactManager {
     private boolean isCityOrStateExist(String name) {
         return contactList.stream()
                           .anyMatch(personElement ->
-                                    personElement.getCITY().equals(name) ||
-                                            personElement.getSTATE().equals(name));
+                                    personElement.getCity().equals(name) ||
+                                            personElement.getState().equals(name));
     }
     
     /**
@@ -250,8 +250,8 @@ public class ContactManager {
      */
     private Contact searchContact(String name) {
         Contact foundContact = contactList.stream()
-                .filter(contact -> contact.getFIRST_NAME().equals(name) ||
-                        contact.getLAST_NAME().equals(name))
+                .filter(contact -> contact.getFirstName().equals(name) ||
+                        contact.getLastName().equals(name))
                 .findFirst().orElse(null);
         return foundContact;
     }
@@ -264,8 +264,8 @@ public class ContactManager {
      */
     private Contact searchContactByCityOrState(String name) {
         Contact foundContact = contactList.stream()
-                .filter(contact -> contact.getSTATE().equals(name) ||
-                        contact.getCITY().equals(name))
+                .filter(contact -> contact.getState().equals(name) ||
+                        contact.getCity().equals(name))
                 .findFirst().orElse(null);
         return foundContact;
     }

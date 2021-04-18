@@ -39,8 +39,8 @@ public class AddressBookSimulator14 {
                     addressBookSimulator14.booksMap.entrySet().forEach(entry -> {
                         System.out.println(entry.getKey());
                         System.out.println(entry.getValue().getContactList().stream()
-                                                .filter(contact -> contact.getFIRST_NAME().equals(contactName) ||
-                                                        contact.getLAST_NAME().equals(contactName))
+                                                .filter(contact -> contact.getFirstName().equals(contactName) ||
+                                                        contact.getLastName().equals(contactName))
                                                 .findFirst().orElse(null));
                     });
                     break;
@@ -50,8 +50,8 @@ public class AddressBookSimulator14 {
                     addressBookSimulator14.booksMap.entrySet().forEach(entry -> {
                         System.out.println(entry.getKey());
                         System.out.println(entry.getValue().getContactList().stream()
-                                                .filter(contact -> contact.getCITY().equals(placeName) ||
-                                                        contact.getSTATE().equals(placeName))
+                                                .filter(contact -> contact.getCity().equals(placeName) ||
+                                                        contact.getState().equals(placeName))
                                                 .findFirst().orElse(null));
                     });
                     break;
@@ -61,8 +61,8 @@ public class AddressBookSimulator14 {
                     addressBookSimulator14.booksMap.entrySet().forEach(entry -> {
                         System.out.println(entry.getKey());
                         System.out.println("same cities or states: " + entry.getValue().getContactList().stream()
-                                                                            .filter(contact -> contact.getCITY().equals(placeName2) ||
-                                                                                    contact.getSTATE().equals(placeName2))
+                                                                            .filter(contact -> contact.getCity().equals(placeName2) ||
+                                                                                    contact.getState().equals(placeName2))
                                                                             .count());
                     });
                     break;
